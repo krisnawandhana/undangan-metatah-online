@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+/*
+ * Palette from the brief. The "-ink" variants are darker shades of the
+ * accents, tuned to reach 4.5:1 on ivory/cream for small text. The base
+ * accents are kept for ornaments, rules, and large type.
+ */
+@theme {
+  --color-ivory: #f8f5ef;
+  --color-cream: #eee6d8;
+  --color-cream-deep: #e4d9c6;
+  --color-brown: #49382e;
+  --color-brown-soft: #6e5d51;
+  --color-gold: #b69a65;
+  --color-gold-ink: #7d6639;
+  /* Small gold text on the deep-brown section (≈5.4:1). */
+  --color-gold-light: #c9b184;
+  --color-terracotta: #a65f46;
+  --color-terracotta-ink: #8f4f39;
+  --color-sage: #78816b;
+  --color-sage-ink: #5a6350;
+  --color-line: #dbcfba;
+
+  --font-serif: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-sans: var(--font-lato), "Lato", system-ui, sans-serif;
+
+  --tracking-eyebrow: 0.32em;
+
+  /* Cover entrance — CSS so it runs from first paint, before hydration. */
+  --animate-rise: rise 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-gate-rise: gate-rise 1.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+  }
+
+  @keyframes gate-rise {
+    from {
+      opacity: 0;
+      transform: translateY(5%);
+    }
+  }
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    background-color: var(--color-ivory);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    background-color: var(--color-ivory);
+    color: var(--color-brown);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.7;
+    overflow-x: clip;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Lock page scroll behind an open lightbox. */
+  html:has(dialog[open]) {
+    overflow: hidden;
+  }
+
+  ::selection {
+    background-color: var(--color-cream-deep);
+    color: var(--color-brown);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold-ink);
+    outline-offset: 3px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-serif);
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+}
+
+@utility numerals {
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+/* Notched-corner frame inspired by the stepped profile of a Balinese gate. */
+@utility frame-notched {
+  clip-path: polygon(
+    0 18px, 9px 18px, 9px 9px, 18px 9px, 18px 0,
+    calc(100% - 18px) 0, calc(100% - 18px) 9px, calc(100% - 9px) 9px, calc(100% - 9px) 18px, 100% 18px,
+    100% calc(100% - 18px), calc(100% - 9px) calc(100% - 18px), calc(100% - 9px) calc(100% - 9px), calc(100% - 18px) calc(100% - 9px), calc(100% - 18px) 100%,
+    18px 100%, 18px calc(100% - 9px), 9px calc(100% - 9px), 9px calc(100% - 18px), 0 calc(100% - 18px)
+  );
+}
