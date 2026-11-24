@@ -29,11 +29,23 @@
   /* Cover entrance — CSS so it runs from first paint, before hydration. */
   --animate-rise: rise 1s cubic-bezier(0.22, 1, 0.36, 1) both;
   --animate-gate-rise: gate-rise 1.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  /* Penjor swaying in a light breeze. Uses `rotate`, not `transform`, so it
+     composes with GSAP and translate utilities instead of fighting them. */
+  --animate-sway: sway 7s ease-in-out infinite alternate;
 
   @keyframes rise {
     from {
       opacity: 0;
       transform: translateY(14px);
+    }
+  }
+
+  @keyframes sway {
+    from {
+      rotate: -0.8deg;
+    }
+    to {
+      rotate: 0.8deg;
     }
   }
 

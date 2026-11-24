@@ -1,4 +1,4 @@
-import { PatraFlourish } from "@/components/ornaments/Patra";
+import { CanangSari } from "@/components/ornaments/CanangSari";
 import { DecorativeDivider } from "@/components/ui/DecorativeDivider";
 import { Container, Section } from "@/components/ui/Section";
 import type { InvitationData } from "@/types/invitation";
@@ -12,7 +12,7 @@ export function GreetingSection({ copy }: Props) {
         {/* First thing seen after the gate opens: plays as one sequence. */}
         <div data-reveal-sequence data-reveal-delay="0.15">
           <div data-reveal-step>
-            <PatraFlourish className="mx-auto h-14 w-28 text-gold sm:h-16 sm:w-32" />
+            <CanangSari className="mx-auto h-28 w-28 text-gold sm:h-32 sm:w-32" />
           </div>
 
           <h2

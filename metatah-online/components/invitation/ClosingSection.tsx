@@ -1,4 +1,5 @@
 import { PatraFlourish } from "@/components/ornaments/Patra";
+import { Penjor } from "@/components/ornaments/Penjor";
 import { ArrowUp } from "@/components/ui/icons";
 import { Container, Section } from "@/components/ui/Section";
 import type { InvitationData } from "@/types/invitation";
@@ -7,7 +8,25 @@ type Props = Pick<InvitationData, "copy" | "family">;
 
 export function ClosingSection({ copy, family }: Props) {
   return (
-    <Section id="penutup" labelledBy="penutup-title" className="pb-16 sm:pb-20">
+    <Section id="penutup" labelledBy="penutup-title" className="pb-32 lg:pb-20">
+      {/* Penjor flanking the bottom of the page. Small and whole below 1024px
+          (they sit beside "Kembali ke atas"); tall beside the signature on
+          wide screens, where the margins clear the text column. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 flex justify-between overflow-hidden px-1 lg:px-0"
+      >
+        <div data-reveal="fade" className="h-56 lg:h-[34rem]">
+          <div className="h-full origin-[29%_100%] text-gold opacity-70 motion-safe:animate-sway lg:opacity-90">
+            <Penjor className="h-full w-auto" />
+          </div>
+        </div>
+        <div data-reveal="fade" className="h-56 lg:h-[34rem]">
+          <div className="h-full origin-[71%_100%] text-gold opacity-70 motion-safe:animate-sway motion-safe:[animation-delay:-3.5s] lg:opacity-90">
+            <Penjor mirror className="h-full w-auto" />
+          </div>
+        </div>
+      </div>
       <Container size="text" className="text-center">
         <div data-reveal="fade">
           <PatraFlourish className="mx-auto h-14 w-28 text-gold sm:h-16 sm:w-32" />

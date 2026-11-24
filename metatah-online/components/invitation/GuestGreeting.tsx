@@ -1,30 +1,34 @@
 "use client";
 
 import { useGuestName } from "@/hooks/useGuestName";
+import { cn } from "@/lib/utils";
 
 export const GUEST_FALLBACK = "Bapak/Ibu/Saudara/i";
 
-/** Pure view — also used as the Suspense fallback before the URL is read. */
-export function GuestGreetingView({ name }: { name: string | null }) {
+/**
+ * The addressee written on the front of the envelope. Pure view — also used
+ * as the Suspense fallback before the URL has been read.
+ */
+export function GuestAddressView({ name }: { name: string | null }) {
   return (
-    <div className="relative mx-auto w-full max-w-[21rem] border border-line bg-ivory/85 px-6 py-5 backdrop-blur-[2px]">
-      <p className="text-[0.8125rem] text-brown-soft">Kepada Yth.</p>
-      {name ? (
-        <>
-          <p className="mt-1 text-[0.8125rem] text-brown-soft">{GUEST_FALLBACK}</p>
-          <p className="mt-2 font-serif text-[1.75rem] leading-tight font-medium break-words">
-            {name}
-          </p>
-        </>
-      ) : (
-        <p className="mt-2 font-serif text-[1.75rem] leading-tight font-medium">{GUEST_FALLBACK}</p>
-      )}
-      <p className="mt-2 text-[0.8125rem] text-brown-soft">Di Tempat</p>
+    <div className="text-center">
+      <p className="text-[0.75rem] leading-snug text-brown-soft">
+        Kepada Yth.{name && <> {GUEST_FALLBACK}</>}
+      </p>
+      <p
+        className={cn(
+          "mx-auto mt-1 inline-block max-w-full border-b border-dotted border-gold-ink/50 px-2 pb-1 font-serif leading-tight font-medium break-words",
+          (name ?? GUEST_FALLBACK).length > 32 ? "text-lg" : "text-[1.375rem] sm:text-[1.625rem]",
+        )}
+      >
+        {name ?? GUEST_FALLBACK}
+      </p>
+      <p className="mt-1.5 text-[0.75rem] leading-snug text-brown-soft">Di Tempat</p>
     </div>
   );
 }
 
-export function GuestGreeting() {
+export function GuestAddress() {
   const name = useGuestName();
-  return <GuestGreetingView name={name} />;
+  return <GuestAddressView name={name} />;
 }
